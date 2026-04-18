@@ -4,7 +4,7 @@
 
 ## Посмотреть страницу
 
-- На: `https://vk-miem-test.vercel.app`
+- На: [https://vk-miem-test.vercel.app](https://vk-miem-test.vercel.app)
 
 ## Запуск
 
