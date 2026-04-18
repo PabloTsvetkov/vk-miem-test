@@ -1,0 +1,131 @@
+.pageMainContainer {
+    --max-width-grid: calc(5 * 200px + 4 * 30px);
+    width: 100%;
+    overflow-x: hidden;
+    min-height: 100vh;
+    background-color: var(--color-bg);
+}
+
+.controlsMainContainer {
+    width: 100%;
+    max-width: var(--max-width-grid);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.controlsMainContainer .selectContainer {
+    flex: 1;
+    min-width: 120px;
+}
+
+.controlsMainContainer .inputContainer {
+    flex: 4;
+}
+
+.count {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.2);
+    max-width: var(--max-width-grid);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mainContentContainer {
+    box-sizing: border-box;
+    padding: 0px 20px 30px 20px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gridCont {
+    width: 100%;
+}
+
+.gridCont .simpleGrid {
+    max-width: var(--max-width-grid);
+    margin-inline: auto;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 200px));
+}
+
+.item {
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 280px;
+    max-height: 280px;
+}
+
+.paginationContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.errorMsg {
+    color: red;
+    width: var(--max-width-grid);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.emptyMsg {
+    color: rgba(255, 255, 255, 0.5);
+    max-width: var(--max-width-grid);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+@media (max-width: 745px) {
+    .controlsMainContainer {
+        gap: 5px;
+    }
+
+    .gridCont .simpleGrid {
+        max-width: calc(5 * 170px + 4 * 20px);
+        grid-template-columns: repeat(auto-fill, minmax(170px, 170px));
+        gap: 20px !important;
+    }
+
+    .item {
+        min-width: 170px;
+        max-width: 170px;
+        min-height: 240px;
+        max-height: 240px;
+    }
+
+    .item img {
+        height: 130px;
+    }
+}
+
+@media (max-width: 1160px) {
+    .pageMainContainer {
+        --max-width-grid: calc(200px * 4 + 30px * 3);
+    }
+}
+@media (max-width: 930px) {
+    .pageMainContainer {
+        --max-width-grid: calc(200px * 3 + 30px * 2);
+    }
+}
+@media (max-width: 746px) {
+    .pageMainContainer {
+        --max-width-grid: calc(170px * 3 + 20px * 2);
+    }
+}
+@media (max-width: 590px) {
+    .pageMainContainer {
+        --max-width-grid: calc(170px * 2 + 20px * 2);
+    }
+}
