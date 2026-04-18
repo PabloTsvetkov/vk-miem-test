@@ -128,4 +128,8 @@
     .pageMainContainer {
         --max-width-grid: calc(170px * 2 + 20px * 2);
     }
+    .mainContentContainer {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
 }

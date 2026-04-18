@@ -1,73 +1,181 @@
-# React + TypeScript + Vite
+# SPA-приложение с персонажами Rick and Morty.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## !ВАЖНО: открывать лучше с VPN для лучшей работы апи
 
-Currently, two official plugins are available:
+## Посмотреть страницу
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- На: `https://vk-miem-test.vercel.app`
 
-## React Compiler
+## Запуск
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Клонирование и установка
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/PabloTsvetkov/vk-miem-test.git
+cd vk-miem-test
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Запуск в дев режиме
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+По умолчанию приложение доступно по адресу `http://localhost:5173`.
+
+### Билд
+
+```bash
+npm run build
+```
+
+### Превью
+
+```bash
+npm run preview
+```
+
+## Скрипты
+
+- `npm run dev` - запуск dev-сервера
+- `npm run build` - TypeScript check + продуктовый билд
+- `npm run preview` - локальный просмотр production-сборки
+- `npm run lint` - запуск ESLint
+
+## Стек
+
+- React 19
+- TypeScript
+- Vite
+- TanStack(React) Query
+- VKUI
+- CSS Modules
+
+## Фичи
+
+- Список персонажей в карточках
+- Поиск по имени (с дебаунсом)
+- Фильтрация по статусу (Alive / Dead / Unknown)
+- Пагинация
+- Модальное окно с деталями персонажа
+- Обработка состояний:
+  - loading
+  - error
+  - empty state
+
+## API
+
+- [Rick and Morty API](https://rickandmortyapi.com/documentation#rest)
+
+## Скриншоты (лежат все в папке screenshots)
+
+### 1. Главная страница
+
+<img src="./screenshots/main-page.png" alt="Главная страница" width="520" />
+
+### 2. Поиск
+
+<img src="./screenshots/search.png" alt="Поиск" width="520" />
+
+### 3. Фильтрация
+
+<img src="./screenshots/filter.png" alt="Фильтрация по статусу" width="520" />
+
+### 4. Модальное окно персонажа
+
+<img src="./screenshots/modal.png" alt="Модальное окно персонажа" width="520" />
+
+### 5. Загрузка
+
+<img src="./screenshots/loading.png" alt="Загрузка" width="520" />
+
+### 6. Пустой результат
+
+<img src="./screenshots/empty-state.png" alt="Пустой результат" width="520" />
+
+### 7. Ошибка запроса
+
+<img src="./screenshots/error-state.png" alt="Ошибка запроса" width="520" />
+
+### 8. Мобильная главная
+
+<img src="./screenshots/mobile.png" alt="Мобильная версия — главная" width="320" />
+
+### 9. Мобильная модалка
+
+<img src="./screenshots/mobile_modal.png" alt="Мобильная версия — модалка" width="320" />
+
+### 10. Пагинация
+
+<img src="./screenshots/pagination.png" alt="Пагинация" width="520" />
+
+## Структура проекта
+
+```text
+src/
+  api/
+  components/
+    Header/
+    Modal/
+  pages/
+    CharactersList/
+  types/
+  App.tsx
+  main.tsx
+```
+
+## Особенности
+
+- Часто вылетает 429 из-за апи (видимо стоят жесткие фильтры на количество запросов с одного айпишника). Мной была достигнута стабильная работа только при 10 секундах между запросами (дебаунс и для поиска, и для фильтров), но я не стал добавлять состояние для этого, потому что нет точной цифры от апи (ретраи не делаю по этой же причине). Эту проблему не стал исправлять осознанно, чтобы можно было показать обработку ошибок и потому что требуется качество "тестового"
+- Обработка ошибок, пустой стейт и загрузка сделаны максимально просто для визуализации.
+
+
+## Заметки
+
+По ходу разработки велся отдельный файл с заметками и принятыми решениями:
+
+- [Notes.md](./Notes.md)
+
+### Заметки кратко (гпт самарайз):
+1 Этап. Выбор стека
+React + TypeScript и CSS Modules взял сразу, потому что это базово и удобно для меня. Из опционального изучил TanStack Query и подключил UI-kit VK, потому что оба инструмента подошли под задачу.
+
+2 Этап. Проектирование
+Приложение простое: одна страница с карточками, фильтрами, поиском, пагинацией и модалкой. На этом этапе собрал структуру проекта, настроил API-запрос и описал интерфейс персонажа.
+
+3 Этап. Обучение
+Отдельно посмотрел, как работает TanStack Query. Для задачи хватило базового понимания.
+
+4 Этап. TanStack Query
+Подключил провайдер и попробовал useQuery на главной странице. Все сразу заработало: загрузка, данные, статусы.
+
+5 Этап. Верстка
+Макет заранее не рисовал, собирал интерфейс по ходу. Настроил базовый лейаут, палитру и грид карточек через SimpleGrid.
+
+6 Этап. Подгрузка данных
+Заменил моки на реальные данные с API и добавил состояние страницы для пагинации. Потом подключил саму пагинацию и количество страниц с сервера.
+
+7 Этап. Поиск и фильтры
+Собрал поиск и фильтры через UI-kit и передал их в параметры запроса. Все заработало, но появились ошибки 429 из-за слишком частых запросов к API.
+
+8 Этап. Правки по визуалу
+Подправил отступы, выравнивания и расположение элементов. Сделал интерфейс ближе к финальному виду.
+
+9 Этап. Модальное окно для персонажа
+Сделал свою модалку вместо готовой из UI-kit. Внутри вывел данные персонажа и добавил закрытие по клику вне окна.
+
+10. Надпись "Найдено всего"
+Добавил отдельный текст с количеством найденных карточек под строкой поиска.
+
+11. Правки по стилям
+Доработал акценты, тени, радиусы и общий внешний вид. Заодно упростил шапку и оставил большое лого по центру.
+
+12. Состояние ошибок и загрузки
+Для загрузки поставил спиннер из UI-kit. Для ошибок вывожу обычный текст.
+
+13. Небольшая чистка
+Удалил лишние стили и неиспользуемые элементы. Привел проект в более аккуратный вид.
+
+14. Деплой
+Залил проект на GitHub и задеплоил на Vercel. После проверки сделал вывод, что проблема с 429 связана с ограничениями самого API.

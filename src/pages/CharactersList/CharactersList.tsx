@@ -145,11 +145,13 @@ export default function CharactersList(): React.ReactNode {
               </div>
             </>
           ) : (
-            <p className={s.emptyMsg}>Ничего не найдено. Измените поиск или фильтр.</p>
+            <p className={s.emptyMsg}>
+              Ничего не найдено. Измените поиск или фильтр.
+            </p>
           )
         ) : isLoading ? (
           <>
-            <Spinner size="xl"/>
+            <Spinner size="xl" />
           </>
         ) : (
           <>
