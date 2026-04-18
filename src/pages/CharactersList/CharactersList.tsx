@@ -113,7 +113,7 @@ export default function CharactersList(): React.ReactNode {
             <>
               <div className={s.gridCont}>
                 <SimpleGrid className={s.simpleGrid} gap={30} align="center">
-                  {data.results.map((el) => {
+                  {data.results.map((el: Character) => {
                     const description = (
                       <div>
                         Status: {el?.status},
@@ -153,7 +153,10 @@ export default function CharactersList(): React.ReactNode {
           </>
         ) : (
           <>
-            <p className={s.errorMsg}>Произошла ошибка, попробуйте перезагрузить страницу. Ошибка: {error.message}</p>
+            <p className={s.errorMsg}>
+              Произошла ошибка, попробуйте перезагрузить страницу. Ошибка:{" "}
+              {error instanceof Error ? error.message : String(error ?? "")}
+            </p>
           </>
         )}
       </div>
